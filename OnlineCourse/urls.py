@@ -3,11 +3,6 @@ from . import views
 
 urlpatterns = [
     path(
-        "course/<int:course_id>/",
-        views.course_details,
-        name="course_details"
-    ),
-    path(
         "course/<int:course_id>/submit/",
         views.submit,
         name="submit"
