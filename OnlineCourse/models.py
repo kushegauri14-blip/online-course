@@ -72,3 +72,24 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"Submission by {self.enrollment.user.username}"
+class Instructor(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.user.username
+
+
+class Learner(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.user.username
+
+admin.site.register(Instructor)
+admin.site.register(Learner)
