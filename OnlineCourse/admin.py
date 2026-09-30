@@ -5,7 +5,9 @@ from .models import (
     Question,
     Choice,
     Enrollment,
-    Submission
+    Submission,
+    Instructor,
+    Learner
 )
 
 
