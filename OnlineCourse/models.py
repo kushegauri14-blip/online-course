@@ -48,16 +48,27 @@ class Choice(models.Model):
         return self.choice_text
 
 
-class Submission(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    selected_choice = models.ForeignKey(
-        Choice,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
+class Enrollment(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
     )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.course.name}"
+
+
+class Submission(models.Model):
+    enrollment = models.ForeignKey(
+        Enrollment,
+        on_delete=models.CASCADE
+    )
+    choices = models.ManyToManyField(Choice)
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.question.question_text}"
+        return f"Submission by {self.enrollment.user.username}"
